@@ -64,7 +64,7 @@ router.get('/new', function(req, res, next) {
 module.exports = router;
 ```
 
-Carefully reading the code above should be enough to get you started. Note that handlebars templating is not used in the example above, but you are required to use handlebars templating for your assignment. So you should be using *res.render*, not *res.send*! And though it isn't nessecary to, you can modify the fakeDatabase.js code if you wish.
+Carefully reading the code above should be enough to get you started. Note that handlebars templating is not used in the example above, but you are required to use handlebars templating for your assignment. So you should be using *res.render*, not *res.send*! And though it isn't necessary to, you can modify the fakeDatabase.js code if you wish.
 
 #### Assignment 
 Create an Express application that has the following routes:
