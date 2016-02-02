@@ -1,12 +1,16 @@
-<ul>
-	{{#each cats}}
-		<h3> Created a new cat named {{this.name}} </h3>
-		<h2> Age: {{this.age}} </h2>
-		<h2> Colors: </h2> 
-		<ul>
-			{{#each this.colors}}
-				<li>{{this}}</li>
-			{{/each}}
-		</ul>
-	{{/each}}
-</ul>
+<table>
+	<thead>
+		<th>Name</th>
+		<th>Age</th>
+		<th>Colors</th>
+	</thead>
+	<tbody>
+		{{#each cats}}
+			<tr>
+				<td> {{this.name}} </td>
+				<td> {{age}} </td>
+				<td> {{#each this.colors}} {{this}} {{/each}} </td>
+			</tr>
+		{{/each}}
+	</tbody>
+</table>

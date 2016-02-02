@@ -25,7 +25,7 @@ function shuffle(array) {
 
 //function that constructs and returns cat object
 function Cat(){
-  var possibleColors = ['black','white','red','blue','grey','rainbow','yellow'];
+  var possibleColors = ['Black','White','Red','Blue','Grey','Rainbow','Yellow'];
   var possibleNames = ['Orange','Pear','Pineapple','Grapefruit','Tomato','Carrot','Banana'];
   shuffle(possibleColors);
   shuffle(possibleNames);

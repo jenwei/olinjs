@@ -1,8 +1,3 @@
-<h3> Deleted an old cat named {{name}} </h3>
-<h2> Age: {{age}} </h2>
-<h2> Colors: </h2> 
-<ul>
-	{{#each colors}}
-		<li>{{this}}</li>
-	{{/each}}
-</ul>
+<h2> Released an old cat named {{name}} </h2>
+<p> Age: {{age}} </p>
+<p> Colors: {{#each this.colors}} {{this}} {{/each}} </p>
