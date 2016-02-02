@@ -1,0 +1,12 @@
+<ul>
+	{{#each cats}}
+		<h3> Created a new cat named {{this.name}} </h3>
+		<h2> Age: {{this.age}} </h2>
+		<h2> Colors: </h2> 
+		<ul>
+			{{#each this.colors}}
+				<li>{{this}}</li>
+			{{/each}}
+		</ul>
+	{{/each}}
+</ul>

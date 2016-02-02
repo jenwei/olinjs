@@ -17,6 +17,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', index.home);
+app.get('/cats/new', index.newCat);
+app.get('/cats', index.cats);
+app.get('/cats/bycolor/:color', index.bycolor);
+app.get('/cats/delete/old/', index.deleteOld);
 
 app.listen(3000);
