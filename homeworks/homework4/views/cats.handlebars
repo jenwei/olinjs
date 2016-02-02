@@ -1,0 +1,16 @@
+<table>
+	<thead>
+		<th>Name</th>
+		<th>Age</th>
+		<th>Colors</th>
+	</thead>
+	<tbody>
+		{{#each cats}}
+			<tr>
+				<td> {{this.name}} </td>
+				<td> {{age}} </td>
+				<td> {{#each this.colors}} {{this}} {{/each}} </td>
+			</tr>
+		{{/each}}
+	</tbody>
+</table>
