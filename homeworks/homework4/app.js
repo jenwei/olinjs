@@ -20,8 +20,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/cats/new', index.newCat);
 app.get('/cats', index.cats);
-app.get('/cats/bycolor/:color', index.bycolor);
-app.get('/cats/delete/old/', index.deleteOld);
+app.get('/cats/bycolor/:color', index.byColor);
+app.get('/cats/delete/old', index.deleteOld);
+app.get('/cats/favorites', index.favorites);
 
 mongoose.connect('mongodb://localhost/test');
 

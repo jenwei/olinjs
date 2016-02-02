@@ -73,6 +73,7 @@ var catsByColor =  function (req, res, next){
   });
 }
 
+// removes old cats
 var deleteOld = function (req, res, next){
   CatDB.findOneAndRemove({}).sort({'age': -1}).exec(function(err, cat){
     if (err){
@@ -83,7 +84,25 @@ var deleteOld = function (req, res, next){
   })
 }
 
+// returns my favorite cats (age 5 and rainbow)
+var favorites = function (req, res, next){
+  CatDB.find({
+    $and: [
+      {'colors':'Rainbow'},
+      {'age':5}
+    ]
+  }).exec(function(err, cats){
+    if (err){
+      res.status(500).send("Error finding Jen's favorite cats");
+    } else{
+      res.render('cats', {cats:cats});
+    }
+  })
+}
+
+
 module.exports.newCat = newCat; 
 module.exports.cats = cats;
-module.exports.bycolor = catsByColor;
+module.exports.byColor = catsByColor;
 module.exports.deleteOld = deleteOld;
+module.exports.favorites = favorites;
