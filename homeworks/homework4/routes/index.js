@@ -2,6 +2,15 @@ var express = require('express');
 var db = require('../fakeDatabase');
 var CatDB = require('../models/catModel.js');
 
+// You can creat an object that is as follows:
+// var routes = {}
+// And you can module.exports = routes in the end of the document. As a result, you can name methods as follows:
+// routes.createCat = function (){...}
+// routes.newCat = function(){...}
+// Hence, you get to export the whole object once and allude to the methods you want for your API at app.js
+// and you get rid off the repetition happening in lines 115-120
+
+
 /* shuffle array function taken from http://stackoverflow.com/
 questions/2450954/how-to-randomize-shuffle-a-javascript-array
 */
@@ -75,6 +84,7 @@ var catsByColor =  function (req, res, next){
 
 // removes old cats
 var deleteOld = function (req, res, next){
+  // Awesome. I like the sorting you are doing with mongoose here
   CatDB.findOneAndRemove({}).sort({'age': -1}).exec(function(err, cat){
     if (err){
       res.status(500).send('Error deleting a cat');
@@ -86,6 +96,7 @@ var deleteOld = function (req, res, next){
 
 // returns my favorite cats (age 5 and rainbow)
 var favorites = function (req, res, next){
+  // Great use of $and
   CatDB.find({
     $and: [
       {'colors':'Rainbow'},
