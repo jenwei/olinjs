@@ -1,0 +1,16 @@
+/** Importing fonts from Google **/
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic,900italic|Open+Sans:400,400italic,600,700,600italic,700italic);
+
+
+body{
+	font: 12px 'Lato', sans-serif;
+	height: 100%;
+}
+
+div {
+	margin-right: auto;
+	margin-left: auto;
+	letter-spacing: 0;
+}
+
+h
