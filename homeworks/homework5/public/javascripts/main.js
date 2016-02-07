@@ -1,4 +1,5 @@
-var $form = $("#ajax-form");
+var $add = $("#addIngredient");
+var $edit = $("#editIngedient");
 
 var onSuccess = function(data, status) {
   var img = "<img src='"+data+"'/>";
@@ -10,14 +11,16 @@ var onError = function(data, status) {
   console.log("error", data);
 };
 
-$form.submit(function(event) {
+$add.submit(function(event) {
   event.preventDefault();
-  var mood = $form.find("[name='mood']:checked").val();
-  var name = $form.find("[name='name']").val();
-  $.get("getCat", {
-    mood: mood,
-    name: name
+  console.log('hi');
+  var name = $add.find("[name='name']").val();
+  var price = $add.find("[name='price']").val();
+  $.post("addIngredient", {
+    name: name,
+    price: price,
+    inStock: true
   })
     .done(onSuccess)
-    .error(onError);
+    .error(onError)
 });
