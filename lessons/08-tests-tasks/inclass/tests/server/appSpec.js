@@ -43,4 +43,29 @@ describe("The app", function() {
       .get('/notaroute')
       .expect(404, done);
   });
+
+  // Adding additional routes to test below hereW
+  it('should return 200 OK on GET /cats/new', function(done){
+    request(app)
+      .get('/cats/new')
+      .expect(200, done);
+  });
+
+  it('should return 200 OK on GET /cats/bycolor/:color', function(done){
+    request(app)
+      .get('/cats/new')
+      .expect(200, done);
+  });
+
+  it('should return 200 OK on GET /cats/delete/old', function(done){
+    request(app)
+      .get('/cats/delete/old')
+      .expect(200, done);
+  });
+
+  it('should respond with the correct html on GET /cats/bycolor/:color', function(done){
+    request(app)
+      .get('/cats/bycolor/:color')
+      .expect('Content-Type', 'text/html; charset=utf-8', done);
+  });
 });
