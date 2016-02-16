@@ -1,0 +1,19 @@
+<h1>Welcome!</h1>
+
+<h2>Add new ingredient</h2>
+<div class="container">
+  <form action="addIngredient" method="POST" id='addIngredient'>
+    Name: <input type="text" name="name"/><br/>
+    Price: <input type="text" name="price"/><br/><br/>
+    <input type="submit" value="Add"><br/>
+  </form>
+</div>
+
+<h2 id="ingredients">Menu</h2>
+<div id="ingredients">
+    {{#each ingredients}}
+        <p id="ingredient">{{this.name}} - {{this.price}}</p>
+    {{/each}}
+</div>
+
+<div id="poop"></div>

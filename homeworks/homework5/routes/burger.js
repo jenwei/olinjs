@@ -11,13 +11,13 @@ routes.home = function(req, res) {
 }
 
 routes.ingredients = function(req, res) {
+  // find all the ingredients and render them
   Ingredient.find({}, function (err, ingredients){
     if(err){
       res.status(500).send('Error getting ingredients');
     }else{
-      // res.render(handlebar file,data)
-      console.log(ingredients);
-      res.render('home',{ingredients: ingredients});
+      // FORMAT: res.render({handlebar file},{data})
+      res.render('ingredients',{ingredients: ingredients});
     }
   });
 }
@@ -46,13 +46,13 @@ routes.addIngredient = function(req, res) {
   
   if (ingredient.name == "" || ingredient.name == null
     || ingredient.price == "" || !(isNumber(ingredient.price))){
-    res.status(500).send('Issue with ingredient add');
+    res.status(500).send('Error adding ingredient');
   }
   else{
     var i = new Ingredient(ingredient);
     i.save(function(err){
-      if (err) console.log('Error adding ingredient');
-      else res.send('Ingredient added');
+      if (err) console.log('Error saving added ingredient');
+      else res.status(200).send(ingredient);
     });
   }
 }

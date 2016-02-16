@@ -1,27 +1,4 @@
-<h1>Welcome!</h1>
-
-<h2>Add ingredient</h2>
-<form action="addIngredient" method="POST" id='addIngredient'>
-  Name: <input type="text" name="name"/><br/>
-  Price: <input type="text" name="price"/><br/>
-  <input type="submit" value="Add">
-</form>
-
-<table>
-  <thead>
-    <tr>
-      <td>Ingredients</td>
-      <td>Price</td>
-      <td>In Stock?</td>
-    </tr> 
-  </thead>
-  <tbody>
-    {{#each ingredients}}
-      <tr>
-        <td>{{this.name}}</td>
-        <td>{{this.price}}</td>
-        <td>{{this.inStock}}</td>
-      </tr>
-    {{/each}}
-  </tbody>
-</table>
+<h1>Welcome to Build-Your-Own Burger!</h1>
+<a href='/ingredients' class='button'>View, add, and edit ingredients</a>
+<a href='/order' class='button'>Order a burger</a>
+<a href='/kitchen' class='button'>View/complete orders</a>

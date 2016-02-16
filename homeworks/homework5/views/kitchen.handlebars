@@ -1,12 +1,15 @@
 <h1>Kitchen</h1>
-
 <table>
   <thead>
+    <tr>
+    </tr> 
+  </thead>
+  <tbody>
+    {{#each orders}}
     <tr>
       <td>Order</td>
       <td><input type="submit" value="Complete"></td>
     </tr> 
-  </thead>
-  <tbody>
+    {{/each}}
   </tbody>
 </table>

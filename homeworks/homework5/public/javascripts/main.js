@@ -1,9 +1,11 @@
 var $add = $("#addIngredient");
-var $edit = $("#editIngedient");
+var $edit = $("#editIngredient");
 
 var onSuccess = function(data, status) {
-  var img = "<img src='"+data+"'/>";
-  $("#result").html(img);
+  console.log('succeeded!');
+  console.log(data);
+  var newIngred = "<p>"+data.name+"-"+data.price+"</p>";
+  $("#ingredients").prepend(newIngred);
 };
 
 var onError = function(data, status) {
@@ -13,7 +15,6 @@ var onError = function(data, status) {
 
 $add.submit(function(event) {
   event.preventDefault();
-  console.log('hi');
   var name = $add.find("[name='name']").val();
   var price = $add.find("[name='price']").val();
   $.post("addIngredient", {
