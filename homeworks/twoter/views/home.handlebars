@@ -1,0 +1,32 @@
+<div id = 'navbar'>
+	<h1>Twoter</h1>
+	<a href='/login' class='button'>Login</a>
+	<h3>Logout</h3>
+</div>
+
+<div class'container'>
+	<div id ='twotFeed'>
+		{{#each twots}}
+	</div>
+
+	<div id='twotForm'>
+		<form action='twot' method='POST' id='twot'>
+			Twot Message: <input type='text' name='name'/><br/>
+		    <input type='submit' value='Twot'><br/>
+		</form>
+	</div>
+
+
+</div>
+
+<div id = 'sidebar'>
+	<h3>List of Twoters</h3>
+	{{#each user}}
+	<div id='twoters'>
+		<p>{{username}}</p>
+	</div>
+</div>
+
+<a href='/ingredients' class='button'>View, add, and edit ingredients</a>
+<a href='/order' class='button'>Order a burger</a>
+<a href='/kitchen' class='button'>View/complete orders</a>
