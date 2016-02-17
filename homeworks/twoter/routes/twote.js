@@ -7,7 +7,10 @@ var User = require('./../models/userModel.js')
 var routes = {};
 
 routes.home = function(req, res) {
-  res.render('home', {name: req.session.name});
+  Twote.find({}, function(err, twotes) {
+      console.log(twotes[0].message);
+    });
+  //res.render('home', {name: req.session.name, twote: {Twote.find;
 }
 
 routes.twotes = function(req, res) {
@@ -19,7 +22,7 @@ routes.twotes = function(req, res) {
       // FORMAT: res.render({handlebar file},{data})
       res.render('twotes',{twotes: twotes});
     }
-  });
+  })
 }
 
 routes.loginGET = function(req, res) {

@@ -5,7 +5,7 @@ var onSuccess = function(data, status) {
   console.log('succeeded!');
   console.log(data);
   var newTwote = "<p>"+data.message+"-"+data.user+"</p>";
-  $("#twotes").prepend(newTwote);
+  $(".twotes").prepend(newTwote);
 };
 
 var onError = function(data, status) {
@@ -24,4 +24,8 @@ $add.submit(function(event) {
     .done(onSuccess)
     .error(onError)
     return;
+});
+
+$del.submit(function(event) {
+  event.preventDefault();
 });

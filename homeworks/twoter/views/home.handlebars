@@ -6,7 +6,7 @@
 	<form action='logout' method='POST' id='logout'>
 		<input type='submit' value='Logout'>
 	</form>
-	
+
 	<!-- ignoring action and looking at js in main.js -->
 	<form action='addTwote' method='POST' id='twotForm'>
 		Twot Message: <input type='text' name='message'/><br/>
@@ -19,8 +19,17 @@
 
 <div class='container'>
 	<h3>Twotes</h3>
-	<div id='twotes'>
-		{{#each twotes}}{{/each}}
+	<div class='twotes'>
+		{{#each twotes}}
+			<div class='twote'>
+				<p>{{this.name}} - {{this.message}}</p>
+				<form method='POST' id='deleteTwote'>
+					<input type='hidden' value={{this.name}}/><br/>
+	    			<input type='hidden' value={{this.message}}><br/>
+	    			<input type ='submit' value = 'X'><br/>
+				</form>
+			</div>
+		{{/each}}
 	</div>
 
 	
