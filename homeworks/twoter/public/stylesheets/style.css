@@ -38,3 +38,7 @@ a.button{
 	width: 15%;
 	position: fixed;
 }
+
+#login, #logout {
+	float: right;
+}

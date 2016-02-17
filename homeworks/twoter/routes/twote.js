@@ -1,81 +1,63 @@
 var path = require('path');
 var mongoose = require('mongoose');
-var Ingredient = require('./../models/ingredientModel.js');
-var Order = require('./../models/orderModel.js')
+var Twote = require('./../models/twoteModel.js');
+var User = require('./../models/userModel.js')
 
 // routes callback
 var routes = {};
 
 routes.home = function(req, res) {
-  res.render('home', {});
+  res.render('home', {name: req.session.name});
 }
 
-routes.ingredients = function(req, res) {
-  // find all the ingredients and render them
-  Ingredient.find({}, function (err, ingredients){
+routes.twotes = function(req, res) {
+  // find all the twotes and render them
+  twote.find({}, function (err, twotes){
     if(err){
-      res.status(500).send('Error getting ingredients');
+      res.status(500).send('Error getting twotes');
     }else{
       // FORMAT: res.render({handlebar file},{data})
-      res.render('ingredients',{ingredients: ingredients});
+      res.render('twotes',{twotes: twotes});
     }
   });
 }
 
-routes.order = function(req, res) {
-  var data = req.body;
-  var customer = 'Bob'; // default name
-  var ingredients = [];
+routes.loginGET = function(req, res) {
+  res.render('login',{});
 }
 
-routes.kitchen = function(req, res) {
-  res.send('Hell0');
+routes.loginPOST = function(req, res) {
+  req.session.name = req.body.name;
+  res.redirect('/');
 }
 
-// taken from http://stackoverflow.com/questions/
-//6449611/how-to-check-whether-a-value-is-a-number
-//-in-javascript-or-jquery
-function isNumber(n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
-}
-
-routes.addIngredient = function(req, res) {
+routes.addTwote = function(req, res) {
   // does not account for adding duplicates
-  var ingredient = req.body;
-  ingredient.inStock = true;
-  
-  if (ingredient.name == "" || ingredient.name == null
-    || ingredient.price == "" || !(isNumber(ingredient.price))){
-    res.status(500).send('Error adding ingredient');
-  }
-  else{
-    var i = new Ingredient(ingredient);
-    i.save(function(err){
-      if (err) console.log('Error saving added ingredient');
-      else res.status(200).send(ingredient);
+  var twote = req.body;
+  var user = req.session.name;
+  twote = {user: user, message: twote.message};
+  // if (twote.name == "" || twote.name == null || twote.message == "" || twote.message == null){
+  //   res.status(500).send('Error adding twote');
+  // }
+    var t = new Twote(twote);
+    t.save(function(err){
+      if (err) console.log('Error saving added twote');
+      else {
+       res.status(200).send(twote); 
+      }
     });
-  }
 }
 
-routes.outOfStock = function(req, res) {
-  res.send('Hell0');
-}
-
-routes.editIngredient = function(req, res) {
+routes.deleteTwote = function(req, res) {
   var update = req.body;
-  Ingredient.update(update, function(err){
-    if (err) console.log('Error editing ingredient');
-    else res.send('Ingredient edited');
+  Twote.update(update, function(err){
+    if (err) console.log('Error editing twote');
+    else res.send('Twote edited');
   })
 }
 
-routes.submitOrder = function(req, res) {
+routes.logout = function(req, res) {
   res.send('Hell0');
 }
-
-routes.completeOrder = function(req, res) {
-  res.send('Hell0');
-}
-
 
 module.exports = routes;

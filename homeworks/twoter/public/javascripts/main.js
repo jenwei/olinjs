@@ -1,11 +1,11 @@
-var $add = $("#addIngredient");
-var $edit = $("#editIngredient");
+var $add = $("#twotForm");
+var $del = $("#deleteTwote");
 
 var onSuccess = function(data, status) {
   console.log('succeeded!');
   console.log(data);
-  var newIngred = "<p>"+data.name+"-"+data.price+"</p>";
-  $("#ingredients").prepend(newIngred);
+  var newTwote = "<p>"+data.message+"-"+data.user+"</p>";
+  $("#twotes").prepend(newTwote);
 };
 
 var onError = function(data, status) {
@@ -15,13 +15,13 @@ var onError = function(data, status) {
 
 $add.submit(function(event) {
   event.preventDefault();
-  var name = $add.find("[name='name']").val();
-  var price = $add.find("[name='price']").val();
-  $.post("addIngredient", {
-    name: name,
-    price: price,
-    inStock: true
+  var name = $add.find("[name='user']").val();
+  var message = $add.find("[name='message']").val();
+  $.post("addTwote", {
+    user: name,
+    message: message
   })
     .done(onSuccess)
     .error(onError)
+    return;
 });

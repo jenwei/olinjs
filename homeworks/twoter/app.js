@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var exphbs  = require('express-handlebars');
 var express = require('express');
 var mongoose = require('mongoose');
-
+var session = require('express-session');
 // my file
 var twote = require('./routes/twote.js');
 
@@ -20,18 +20,22 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+	secret: 'bleh',
+	resave: false,
+	saveUninitialized: false,
+	cookie: {}
+}));
 
 // create get and post routes
 app.get('/', twote.home);
-app.get('/ingredients', twote.ingredients);
-app.get('/order', twote.order);
-app.get('/kitchen', twote.kitchen);
+app.get('/twoteFeed', twote.twotes);
+app.get('/login', twote.loginGET);
 
-app.post('/addIngredient', twote.addIngredient);
-app.post('/outOfStock', twote.outOfStock);
-app.post('/editIngredient', twote.editIngredient);
-app.post('/submitOrder', twote.submitOrder);
-app.post('/completeOrder', twote.completeOrder);
+app.post('/login', twote.loginPOST);
+app.post('/addTwote', twote.addTwote);
+app.post('/deleteTwote', twote.deleteTwote);
+app.post('/logout', twote.logout);
 
 // connect to mongoose
 mongoose.connect('mongodb://localhost/test');

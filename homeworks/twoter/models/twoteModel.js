@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
 
 var twoteSchema = mongoose.Schema({
-  content: String,
-  twoter: String,
-  postTime: Object
+  message: String,
+  user: String,
+  postTime: String
 });
 
 module.exports = mongoose.model('Twote', twoteSchema);
