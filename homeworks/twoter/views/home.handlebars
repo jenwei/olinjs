@@ -2,13 +2,17 @@
 
 {{#if this.name}}
 	<h3>Welcome {{this.name}}</h3>
-	<input type='submit' value='Logout'>
-	<div id='twotForm'>
-		<form action='addTwote' method='POST' id='twot'>
-			Twot Message: <input type='text' name='message'/><br/>
-		    <input type='submit' value='Twot'><br/>
-		</form>
-	</div>
+	<!-- following action -->
+	<form action='logout' method='POST' id='logout'>
+		<input type='submit' value='Logout'>
+	</form>
+	
+	<!-- ignoring action and looking at js in main.js -->
+	<form action='addTwote' method='POST' id='twotForm'>
+		Twot Message: <input type='text' name='message'/><br/>
+	    <input type='submit' value='Twot'><br/>
+	</form>
+
 {{else}}
 	<a href='/login' class='button'>Login</a>
 {{/if}}

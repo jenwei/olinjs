@@ -57,7 +57,8 @@ routes.deleteTwote = function(req, res) {
 }
 
 routes.logout = function(req, res) {
-  res.send('Hell0');
+  req.session.destroy();
+  res.redirect('/');
 }
 
 module.exports = routes;
