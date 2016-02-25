@@ -6,6 +6,12 @@ var User = require('./../models/userModel.js')
 // Routes callback
 var routes = {};
 
+
+function errorHandler(err, req, res, next) {
+  res.status(500);
+  res.render('error', { error: err });
+}
+
 routes.home = function(req, res) {
   Twote.find({}, function(err, twotes) {
       // Display twotes in reverse post order (from latest to oldest)
@@ -53,33 +59,16 @@ routes.addTwote = function(req, res) {
 }
 
 routes.deleteTwote = function(req, res) {
-  // var message = req.body.message;
-  // var twoter = req.body.user;
-  // var curr_user = req.session.user;
+  var idToDel = req.body.twotteToDelete
 
-  // // In case I need to pass the twote anywhere
-  // var twote = {"message":message, "user":twoter};
+  Twote.findOneAndRemove({"_id":idToDel}, function(err,data){
+    if (err){
+      errorHandler()
+    }
+    res.status(200).end()
 
-  // // Only the twoter can delete his/her own twotes
-  // if (twoter == curr_user) {
-  //   // Find all the twotes and render them
-  //   Twote.findOneAndRemove({
-  //     $and: [
-  //       {'user': twoter},
-  //       {'message': message}
-  //     ]
-  //   }).exec(function{err, twote){
-  //     if(err){
-  //       res.status(500).send('Error deleting twote');
-  //     }else{
-  //       res.render('home', {user: req.session.user, twotes: twotes.reverse()});
-  //     }
-  //   });
-  //   Twote.remove(function(err){
-  //     if (err) console.log('Error removing twote');
-  //     else res.status(200).send(); // NOT SURE WHAT TO SEND HERE
-  //   })
-  // }
+  })
+ 
 }
 
 routes.logout = function(req, res) {

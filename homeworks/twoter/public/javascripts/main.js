@@ -1,9 +1,10 @@
 var $add = $("#twoteForm");
-var $del = $(".deleteTwote");
+var $buttonDelete = $(".deleteTwote");
 
 // json shortcuts for list populating
 var $templateLi = $('#hidden-template-li');
 var $twotesList = $('.twotes');
+var $currentAuthor = $(".loggedInUser")
 
 var onSuccess = function(data, status) {
   console.log('succeeded!');
@@ -44,9 +45,17 @@ $add.submit(function(event) {
     return;
 });
 
-$del.submit(function(event) {
+function deleteHandler(event){
   event.preventDefault();
+  var twotteId = $(this).parent().attr("id");
+  var authorOfDelTwotte = $(this).siblings()[1].children[0].getAttribute("value")
   debugger;
-  var twotteId = $(this).parent.attr("id");
-  $("#"+twotteId).remove()
-});
+  if (authorOfDelTwotte === $currentAuthor[0].getAttribute("value")){
+    $("#"+twotteId).remove()
+    $.post("/deleteTwote", {"twotteToDelete":twotteId})
+  }
+
+}
+
+
+$buttonDelete.click(deleteHandler);

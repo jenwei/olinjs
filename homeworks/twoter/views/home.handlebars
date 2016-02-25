@@ -25,15 +25,15 @@
 	<ul class='twotes'>
 	  <li id="hidden-template-li">
 	    <p><span class="message">Message</span></p>
-	    <p><span class="user"> - You</span></p>
+	    <p><span class="user loggedInUser" value="{{this.user}}"> - You</span></p>
 	    <p><span class="button"><input type='submit' value='x'></span></p>
 	  </li>
 	  {{#each twotes}}
 		<li id="{{this._id}}">
-		 	<p><span class="message" name='message'>{{this.message}}</span></p>
-		    <p><span class="user" name='message'> - {{this.user}}</span></p>
+		 	<p><span class="message" name='message' value="{{this.message}}">{{this.message}}</span></p>
+		    <p><span class="user" name='message' value="{{this.user}}"> - {{this.user}}</span></p>
 		    <!-- TODO Only allows delete if logged in and user is the twoter -->
-		    <input type='submit' value='x' class='deleteTwote'>
+		    <button class='deleteTwote' type="submit">X</button>
 		</li>
 		{{/each}}
 	</ul>
