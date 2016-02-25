@@ -1,14 +1,14 @@
 <h1>Twoter</h1>
 
-{{#if this.name}}
-	<h3>Welcome {{this.name}}</h3>
-	<!-- following action -->
+{{#if this.user}}
+	<h3>Welcome {{this.user}}</h3>
+	<!-- Following action -->
 	<form action='logout' method='POST' id='logout'>
 		<input type='submit' value='Logout'>
 	</form>
 
-	<!-- ignoring action and looking at js in main.js -->
-	<form action='addTwote' method='POST' id='twotForm'>
+	<!-- Ignoring action and looking at js in main.js -->
+	<form action='addTwote' method='POST' id='twoteForm'>
 		Twot Message: <input type='text' name='message'/><br/>
 	    <input type='submit' value='Twot'><br/>
 	</form>
@@ -17,12 +17,36 @@
 	<a href='/login' class='button'>Login</a>
 {{/if}}
 
+<br>
+
+<h3>Twotes</h3>
+<!-- New code from the Burger Helper JSFiddle - credit to Sarah -->
+<div class='container'>
+	<ul class='twotes'>
+	  <li id="hidden-template-li">
+	    <p><span class="message">Message</span></p>
+	    <p><span class="user"> - You</span></p>
+	    <p><span class="button"><input type='submit' value='x'></span></p>
+	  </li>
+	  {{#each twotes}}
+		<li id="{{this._id}}">
+		 	<p><span class="message" name='message'>{{this.message}}</span></p>
+		    <p><span class="user" name='message'> - {{this.user}}</span></p>
+		    <!-- TODO Only allows delete if logged in and user is the twoter -->
+		    <input type='submit' value='x' class='deleteTwote'>
+		</li>
+		{{/each}}
+	</ul>
+</div>
+
+<!-- Old Sketchy Code for Feed of Twotes-->
+<!--
 <div class='container'>
 	<h3>Twotes</h3>
 	<div class='twotes'>
 		{{#each twotes}}
 			<div class='twote'>
-				<p>{{this.name}} - {{this.message}}</p>
+				<p>{{this.message}} - {{this.user}}</p>
 				<form method='POST' id='deleteTwote'>
 					<input type='hidden' value={{this.name}}/><br/>
 	    			<input type='hidden' value={{this.message}}><br/>
@@ -31,15 +55,14 @@
 			</div>
 		{{/each}}
 	</div>
-
-	
 </div>
+-->
 
 <div id='sidebar'>
 	<h3>List of Twoters</h3>
-	{{#each user}}
+	{{#each users}}
 		<div id='twoters'>
-			<p>{{username}}</p>
+			<p>{{this.user}}</p>
 		</div>
 	{{/each}}
 </div>

@@ -3,26 +3,28 @@ var mongoose = require('mongoose');
 var Twote = require('./../models/twoteModel.js');
 var User = require('./../models/userModel.js')
 
-// routes callback
+// Routes callback
 var routes = {};
 
 routes.home = function(req, res) {
   Twote.find({}, function(err, twotes) {
-      console.log(twotes[0].message);
+      // Display twotes in reverse post order (from latest to oldest)
+      res.render('home', {user: req.session.user, twotes: twotes.reverse()});
     });
-  //res.render('home', {name: req.session.name, twote: {Twote.find;
 }
 
+// Might not need this DANGIT
 routes.twotes = function(req, res) {
-  // find all the twotes and render them
-  twote.find({}, function (err, twotes){
+  // Find all the twotes and render them
+  Twote.find({}, function (err, twotes){
     if(err){
       res.status(500).send('Error getting twotes');
     }else{
       // FORMAT: res.render({handlebar file},{data})
+      console.log(twotes);
       res.render('twotes',{twotes: twotes});
     }
-  })
+  });
 }
 
 routes.loginGET = function(req, res) {
@@ -30,33 +32,54 @@ routes.loginGET = function(req, res) {
 }
 
 routes.loginPOST = function(req, res) {
-  req.session.name = req.body.name;
+  req.session.user = req.body.user;
   res.redirect('/');
 }
 
 routes.addTwote = function(req, res) {
-  // does not account for adding duplicates
   var twote = req.body;
-  var user = req.session.name;
-  twote = {user: user, message: twote.message};
+  twote = {user: req.session.user, message: twote.message};
+
   // if (twote.name == "" || twote.name == null || twote.message == "" || twote.message == null){
   //   res.status(500).send('Error adding twote');
   // }
-    var t = new Twote(twote);
-    t.save(function(err){
-      if (err) console.log('Error saving added twote');
-      else {
-       res.status(200).send(twote); 
-      }
-    });
+  var t = new Twote(twote);
+  t.save(function(err){
+    if (err) console.log('Error saving added twote');
+    else {
+     res.status(200).send(twote); 
+    }
+  });
 }
 
 routes.deleteTwote = function(req, res) {
-  var update = req.body;
-  Twote.update(update, function(err){
-    if (err) console.log('Error editing twote');
-    else res.send('Twote edited');
-  })
+  // var message = req.body.message;
+  // var twoter = req.body.user;
+  // var curr_user = req.session.user;
+
+  // // In case I need to pass the twote anywhere
+  // var twote = {"message":message, "user":twoter};
+
+  // // Only the twoter can delete his/her own twotes
+  // if (twoter == curr_user) {
+  //   // Find all the twotes and render them
+  //   Twote.findOneAndRemove({
+  //     $and: [
+  //       {'user': twoter},
+  //       {'message': message}
+  //     ]
+  //   }).exec(function{err, twote){
+  //     if(err){
+  //       res.status(500).send('Error deleting twote');
+  //     }else{
+  //       res.render('home', {user: req.session.user, twotes: twotes.reverse()});
+  //     }
+  //   });
+  //   Twote.remove(function(err){
+  //     if (err) console.log('Error removing twote');
+  //     else res.status(200).send(); // NOT SURE WHAT TO SEND HERE
+  //   })
+  // }
 }
 
 routes.logout = function(req, res) {

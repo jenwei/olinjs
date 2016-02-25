@@ -13,7 +13,7 @@ div {
 	letter-spacing: 0;
 }
 
-a.button{
+.button{
 	-webkit-appearance: button;
 	-moz-appearance: button;
 	appearance: button;
@@ -41,4 +41,12 @@ a.button{
 
 #login, #logout {
 	float: right;
+}
+
+p {
+  margin: 0;
+}
+
+#hidden-template-li {
+  display: none;
 }

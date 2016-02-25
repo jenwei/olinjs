@@ -20,6 +20,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// setup session 
 app.use(session({
 	secret: 'bleh',
 	resave: false,
@@ -29,7 +31,7 @@ app.use(session({
 
 // create get and post routes
 app.get('/', twote.home);
-app.get('/twoteFeed', twote.twotes);
+app.get('/twoteFeed', twote.twotes); // might not need this
 app.get('/login', twote.loginGET);
 
 app.post('/login', twote.loginPOST);
