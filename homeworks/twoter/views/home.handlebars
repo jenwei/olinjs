@@ -19,48 +19,28 @@
 
 <br>
 
-<h3>Twotes</h3>
-<!-- New code from the Burger Helper JSFiddle - credit to Sarah -->
+<!-- New code from the Burger Helper JSFiddle - credit to Sarah - and also help from Filippos with buttons and jQuery values -->
 <div class='container'>
+	<h3>Twotes</h3>
 	<ul class='twotes'>
 	  <li id="hidden-template-li">
-	    <p><span class="message">Message</span></p>
-	    <p><span class="user"> - You</span></p>
-	    <p><span class="button"><input type='submit' value='x'></span></p>
+	    <span class="message">Message</span>
+	    <span class="user loggedInUser" value="{{this.user}}"> - You</span>
+	    <button class='deleteTwote' type='submit'>x</button>
 	  </li>
 	  {{#each twotes}}
 		<li id="{{this._id}}">
-		 	<p><span class="message" name='message'>{{this.message}}</span></p>
-		    <p><span class="user" name='message'> - {{this.user}}</span></p>
-		    <!-- TODO Only allows delete if logged in and user is the twoter -->
-		    <input type='submit' value='x' class='deleteTwote'>
+		 	<span class="message" name='message' value="{{this.message}}">{{this.message}}</span>
+		    <span class="user" name='message' value="{{this.user}}"> - {{this.user}}</span>
+		    <button class='deleteTwote' type='submit'>x</button>
 		</li>
 		{{/each}}
 	</ul>
 </div>
 
-<!-- Old Sketchy Code for Feed of Twotes-->
-<!--
-<div class='container'>
-	<h3>Twotes</h3>
-	<div class='twotes'>
-		{{#each twotes}}
-			<div class='twote'>
-				<p>{{this.message}} - {{this.user}}</p>
-				<form method='POST' id='deleteTwote'>
-					<input type='hidden' value={{this.name}}/><br/>
-	    			<input type='hidden' value={{this.message}}><br/>
-	    			<input type ='submit' value = 'X'><br/>
-				</form>
-			</div>
-		{{/each}}
-	</div>
-</div>
--->
-
-<div id='sidebar'>
+<div class ='sidebar'>
 	<h3>List of Twoters</h3>
-	{{#each users}}
+	{{#each twotes}}
 		<div id='twoters'>
 			<p>{{this.user}}</p>
 		</div>

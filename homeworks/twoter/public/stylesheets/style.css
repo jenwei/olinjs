@@ -23,30 +23,39 @@ div {
 }
 
 .container {
-	margin-left: 0;
-	width: 100px;
+	float: left;
+	width: 80%;
 	clear: both;
 }
 
-.container input {
-	width: 100%;
-	clear: both;
+.user {
+	position: right;
 }
 
-#sidebar {
+.message {
+	position: left;
+}
+
+.clicked {
+	color: #2f4f4f; /*dark grey*/
+}
+
+.sidebar {
 	float: right;
-	width: 15%;
-	position: fixed;
+	width: 20%;
+	background-color: #d3d3d3; /*light grey*/
+	text-align: center;
 }
 
-#login, #logout {
+#logout {
 	float: right;
-}
-
-p {
-  margin: 0;
 }
 
 #hidden-template-li {
   display: none;
+}
+
+.login-container {
+	float: left;
+	width: 100%;
 }

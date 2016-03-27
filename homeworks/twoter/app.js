@@ -31,7 +31,6 @@ app.use(session({
 
 // create get and post routes
 app.get('/', twote.home);
-app.get('/twoteFeed', twote.twotes); // might not need this
 app.get('/login', twote.loginGET);
 
 app.post('/login', twote.loginPOST);

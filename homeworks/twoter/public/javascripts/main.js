@@ -5,6 +5,9 @@ var $del = $(".deleteTwote");
 var $templateLi = $('#hidden-template-li');
 var $twotesList = $('.twotes');
 
+// more shortcuts
+var $currUser = $(".loggedInUser");
+
 var onSuccess = function(data, status) {
   console.log('succeeded!');
   console.log(data);
@@ -17,7 +20,7 @@ var onSuccess = function(data, status) {
   var $newLi = $templateLi.clone();
   $newLi.removeAttr('id');
   $newLi.find('.message').html(message);
-  $newLi.find('.user').html(user);
+  $newLi.find('.user').html(" - " + user);
 
   // Insert the modified template into the page
   $twotesList.prepend($newLi);
@@ -44,9 +47,16 @@ $add.submit(function(event) {
     return;
 });
 
-$del.submit(function(event) {
+// Credit to Filippos (@flymperopoulos) for helping me with the delete
+function deleteHandler(event) {
   event.preventDefault();
-  debugger;
-  var twotteId = $(this).parent.attr("id");
-  $("#"+twotteId).remove()
-});
+  var twoteID = $(this).parent().attr("id");
+  var twoterOfDelTwote = $(this).siblings()[1].getAttribute("value"); // Somewhat sketchy approach :/
+  if (twoterOfDelTwote === $currUser.attr("value")) {
+    $('#'+twoteID).remove()
+    $.post("/deleteTwote", {"twoteToDelete": twoteID})
+  }
+}
+
+// On button click call the handler to delete the Twote
+$del.click(deleteHandler);
